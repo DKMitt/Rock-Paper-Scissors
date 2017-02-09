@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock, Paper, Scissors</title>
+</head>
+<body>
+
+<div id="game">
+	<p><b>ROCK, PAPER, SCISSORS GAME</b></p>
+	<p><b>Please Choose:  R = Rock,  P = Paper,  or  S = Scissors</b></p>
+</div>
+
+<!-- I need use to make a choice
+computer to make choice
+capture those choices
+compare these choices, and determine a win, loss or tie
+Display the results to the user -->
+
+<script type="text/javascript">
+	
+	/*-- variable option for the keyboard --*/
+	var options = ["r", "p", "s"];
+
+	/*-- variable to keep track of the score --*/
+	var wins = 0;
+	var losses = 0;
+	var ties = 0;
+
+	/*-- when user presses a key and it is released it creates an onkeyup event, when this event happens then it will preform the following event. in this case the variable userGuess gets assigned the keyCode after the keyCode is changed to a String and then changes the case to LowerCase charecters if needed. --*/
+	document.onkeyup = function() {
+		var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+		/*-- used for testing, commented out before putting into production --*/
+		// console.log(userGuess);
+
+		/*-- computerGuess gets random number generated that rounds off to the lower number the relates to "options" --*/
+		var computerGuess = options[Math.floor(Math.random()*options.length)];
+
+		/*-- used for testing, commented out before putting into production --*/
+		// console.log(computerGuess);
+
+		/*-- checks to see if user has selecte the correct key and then compares the choices to determine a win, loss or tie --*/
+		if (userGuess=='r' || userGuess=='p' || userGuess=='s') {
+			if ((userGuess=='r') && (computerGuess=='s')) {wins++;
+				// alert("You win!  Wins:" + wins);
+			}
+			if ((userGuess=='r') && (computerGuess=='p')) {losses++;
+				// alert("You loose!  Losses:" + losses);
+			}
+			if ((userGuess=='s') && (computerGuess=='p')) {wins++;
+				// alert("You win!  Wins:" + wins);
+			}
+			if ((userGuess=='s') && (computerGuess=='r')) {losses++;
+				// alert("You loose!  Losses:" + losses);
+			}
+			if ((userGuess=='p') && (computerGuess=='s')) {losses++;
+				// alert("You loose!  Losses:" + losses);
+			}
+			if ((userGuess=='p') && (computerGuess=='r')) {wins++;
+				// alert("You win!  Wins:" + wins);
+			}
+			if ((userGuess==computerGuess)) {ties++;
+				// alert("You tie!  Ties:" + ties);
+			}
+		} else {	
+			alert("Please Choose:  R = Rock,  P = Paper,  or  S = Scissors")
+		}
+
+		/*-- html to display game page title, instructions, and to track scoring. the variable options are used for displaying and storing the data or scores as the game is played --*/
+		var html = "<p><b>ROCK, PAPER, SCISSORS GAME</b></p><p><b>Please Choose:  R = Rock,  P = Paper,  or  S = Scissors</b></p>" +
+		"<p>Your Wins: " + wins + "<p>" +
+		"<p>Your Losses: " + losses + "<p>" +
+		"<p>Your Ties: " + ties + "<p>";
+
+
+		/*-- Used for replacing and updating the above HTML within the targeted <div> to the correct wins, losses and ties as the variables change. --*/
+		document.querySelector('#game').innerHTML = html;
+
+	}
+</script>
+
+</body>
+</html>
